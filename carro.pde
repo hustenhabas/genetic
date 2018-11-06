@@ -1,8 +1,8 @@
 class Carro{
-  private PVector pos = new PVector(width/2, height/2 );
+  private PVector pos = new PVector(width/2, height );
   private PVector vel = new PVector();
   private PVector acc = new PVector();
-  private int r = 40;
+  private int r = 20;
   Dna dna;
   public Carro(float[] father) {
     if (father == null) {
@@ -20,7 +20,9 @@ class Carro{
   }
   void update(int span) {
     PVector ac = PVector.fromAngle(radians(this.getDna()[span -1]));
+    
     ac.setMag(1);
+    line(0, 0, ac.x, ac.y);
     this.applyForce(ac);
     this.vel.add(acc);
     this.pos.add(this.vel);
@@ -44,7 +46,7 @@ class Carro{
       }
     } else {
       for (int i = 0; i < angles.length -1; i++) {
-        angles[i] = angles[i] + random(0,100);
+        angles[i] = father[i] + (random(-100, 100));
       }
     }
   }
